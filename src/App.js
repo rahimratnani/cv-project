@@ -8,22 +8,33 @@ class App extends Component {
 
     this.state = {
       ganeralInfo: {
-        fullname: "",
-        email: "",
-        phone: "",
+        // input handles data being typed
+        fullname: { input: "", saved: "" },
+        email: { input: "", saved: "" },
+        phone: { input: "", saved: "" },
+        // if true, input fields rendered else rendered in viewable format
         editable: true,
       },
     };
   }
-
+  // handles changes done in General information
   handleChange = (event) => {
     if (event.target.type === "text") {
       this.setState((state) => {
         return {
           ganeralInfo: {
-            fullname: event.target.value,
-            email: state.ganeralInfo.email,
-            phone: state.ganeralInfo.phone,
+            fullname: {
+              input: event.target.value,
+              saved: state.ganeralInfo.fullname.saved,
+            },
+            email: {
+              input: state.ganeralInfo.email.input,
+              saved: state.ganeralInfo.email.saved,
+            },
+            phone: {
+              input: state.ganeralInfo.phone.input,
+              saved: state.ganeralInfo.phone.saved,
+            },
             editable: state.ganeralInfo.editable,
           },
         };
@@ -32,9 +43,18 @@ class App extends Component {
       this.setState((state) => {
         return {
           ganeralInfo: {
-            fullname: state.ganeralInfo.fullname,
-            email: event.target.value,
-            phone: state.ganeralInfo.phone,
+            fullname: {
+              input: state.ganeralInfo.fullname.input,
+              saved: state.ganeralInfo.fullname.saved,
+            },
+            email: {
+              input: event.target.value,
+              saved: state.ganeralInfo.email.saved,
+            },
+            phone: {
+              input: state.ganeralInfo.phone.input,
+              saved: state.ganeralInfo.phone.saved,
+            },
             editable: state.ganeralInfo.editable,
           },
         };
@@ -43,9 +63,18 @@ class App extends Component {
       this.setState((state) => {
         return {
           ganeralInfo: {
-            fullname: state.ganeralInfo.fullname,
-            email: state.ganeralInfo.email,
-            phone: event.target.value,
+            fullname: {
+              input: state.ganeralInfo.fullname.input,
+              saved: state.ganeralInfo.fullname.saved,
+            },
+            email: {
+              input: state.ganeralInfo.email.input,
+              saved: state.ganeralInfo.email.saved,
+            },
+            phone: {
+              input: event.target.value,
+              saved: state.ganeralInfo.phone.saved,
+            },
             editable: state.ganeralInfo.editable,
           },
         };
@@ -53,11 +82,64 @@ class App extends Component {
     }
   };
 
+  // handles submission of General information and sets inputs to empty strings
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    this.setState((state) => {
+      return {
+        ganeralInfo: {
+          fullname: {
+            input: "",
+            saved: state.ganeralInfo.fullname.input,
+          },
+          email: {
+            input: "",
+            saved: state.ganeralInfo.email.input,
+          },
+          phone: {
+            input: "",
+            saved: state.ganeralInfo.phone.input,
+          },
+          editable: false,
+        },
+      };
+    });
+  };
+
+  handleGeneralInfoEdit = () => {
+    this.setState((state) => {
+      return {
+        ganeralInfo: {
+          fullname: {
+            input: state.ganeralInfo.fullname.saved,
+            saved: state.ganeralInfo.fullname.saved,
+          },
+          email: {
+            input: state.ganeralInfo.email.saved,
+            saved: state.ganeralInfo.email.saved,
+          },
+          phone: {
+            input: state.ganeralInfo.phone.saved,
+            saved: state.ganeralInfo.phone.saved,
+          },
+          editable: true,
+        },
+      };
+    });
+  };
+
   render() {
     console.log(this.state);
     return (
       <div>
-        <GeneralInfo handleChange={this.handleChange} />
+        <GeneralInfo
+          // passing general information state
+          generalInfo={this.state.ganeralInfo}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          handleEdit={this.handleGeneralInfoEdit}
+        />
       </div>
     );
   }
