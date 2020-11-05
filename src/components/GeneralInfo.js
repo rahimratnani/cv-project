@@ -32,7 +32,7 @@ function GeneralInfo(props) {
             id="phone"
             value={generalInfo.phone.input}
           />
-          <button type="submit" onClick={handleSubmit}>
+          <button type="submit" onClick={handleSubmit.bind(this, "general")}>
             Save
           </button>
         </form>
@@ -41,11 +41,12 @@ function GeneralInfo(props) {
   } else {
     return (
       <div className={styles.container}>
+        <h2>General Information</h2>
         <p>Full Name: {generalInfo.fullname.saved}</p>
         <p>Email: {generalInfo.email.saved}</p>
         <p>Phone: {generalInfo.phone.saved}</p>
 
-        <button onClick={handleEdit} type="button">
+        <button onClick={handleEdit.bind(this, "general")} type="button">
           Edit
         </button>
       </div>
