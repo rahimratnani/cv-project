@@ -1,12 +1,11 @@
 import React from "react";
-import styles from "./Education.module.css";
 
 function Education(props) {
   const { education, handleChange, handleSubmit, handleEdit } = props;
 
   if (education.editable) {
     return (
-      <div className={styles.container}>
+      <div className="container">
         <h2>Education</h2>
         <form>
           <label htmlFor="school">School/College:</label>
@@ -49,7 +48,7 @@ function Education(props) {
     );
   } else {
     return (
-      <div className={styles.container}>
+      <div className="container">
         <h2>Education</h2>
         <p>School/College: {education.schoolName.saved}</p>
         <p>Title of Study: {education.titleOfStudy.saved}</p>

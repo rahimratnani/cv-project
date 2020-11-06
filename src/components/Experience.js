@@ -1,12 +1,11 @@
 import React from "react";
-import styles from "./Experience.module.css";
 
 function Experience(props) {
   const { experience, handleChange, handleSubmit, handleEdit } = props;
 
   if (experience.editable) {
     return (
-      <div className={styles.container}>
+      <div className="container">
         <h2>Work Experience</h2>
         <form>
           <label htmlFor="company">Company Name:</label>
@@ -60,7 +59,7 @@ function Experience(props) {
     );
   } else {
     return (
-      <div className={styles.container}>
+      <div className="container">
         <h2>Work Experience</h2>
         <p>Company Name: {experience.company.saved}</p>
         <p>Position Title: {experience.position.saved}</p>
@@ -73,21 +72,6 @@ function Experience(props) {
       </div>
     );
   }
-
-  //   } else {
-  //     return (
-  //       <div className={styles.container}>
-  //         <h2>Education</h2>
-  //         <p>School/College: {education.schoolName.saved}</p>
-  //         <p>Title of Study: {education.titleOfStudy.saved}</p>
-  //         <p>From: {education.from.saved}</p>
-  //         <p>To: {education.to.saved}</p>
-  //         <button onClick={handleEdit.bind(this, "education")} type="button">
-  //           Edit
-  //         </button>
-  //       </div>
-  //     );
-  //   }
 }
 
 export default Experience;

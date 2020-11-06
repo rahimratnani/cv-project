@@ -1,12 +1,11 @@
 import React from "react";
-import styles from "./GeneralInfo.module.css";
 
 function GeneralInfo(props) {
   const { handleChange, handleSubmit, generalInfo, handleEdit } = props;
 
   if (props.generalInfo.editable) {
     return (
-      <div className={styles.container}>
+      <div className="container">
         <h2>General Information</h2>
         <form>
           <label htmlFor="fullName">Full name:</label>
@@ -40,7 +39,7 @@ function GeneralInfo(props) {
     );
   } else {
     return (
-      <div className={styles.container}>
+      <div className="container">
         <h2>General Information</h2>
         <p>Full Name: {generalInfo.fullname.saved}</p>
         <p>Email: {generalInfo.email.saved}</p>
