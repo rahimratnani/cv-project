@@ -15,6 +15,7 @@ function Education(props) {
             id="school"
             name="school"
             value={education.schoolName.input}
+            placeholder="School/College/University"
           />
           <label htmlFor="title">Title of study:</label>
           <input
@@ -23,6 +24,7 @@ function Education(props) {
             id="title"
             name="title"
             value={education.titleOfStudy.input}
+            placeholder="Enter Degree/Field of Study"
           />
           <label htmlFor="from">From:</label>
           <input

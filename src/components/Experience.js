@@ -15,6 +15,7 @@ function Experience(props) {
             id="company"
             name="company"
             value={experience.company.input}
+            placeholder="Enter Company Name"
           />
           <label htmlFor="position">Position Title:</label>
           <input
@@ -23,18 +24,9 @@ function Experience(props) {
             id="position"
             name="position"
             value={experience.position.input}
+            placeholder="Enter Job Title"
           />
-          <label htmlFor="tasks">Main Tasks:</label>
-          <textarea
-            onChange={handleChange}
-            name="tasks"
-            id="tasks"
-            cols="30"
-            rows="10"
-          >
-            {experience.tasks.input}
-          </textarea>
-          <br />
+
           <label htmlFor="from">From:</label>
           <input
             onChange={handleChange}
@@ -51,6 +43,19 @@ function Experience(props) {
             id="to"
             value={experience.to.input}
           />
+          <label htmlFor="tasks">Main Tasks:</label>
+          <br />
+          <textarea
+            onChange={handleChange}
+            name="tasks"
+            id="tasks"
+            cols="30"
+            rows="3"
+            placeholder="Describe Your Role"
+          >
+            {experience.tasks.input}
+          </textarea>
+          <br />
           <button type="submit" onClick={handleSubmit.bind(this, "experience")}>
             Save
           </button>
@@ -63,9 +68,9 @@ function Experience(props) {
         <h2>Work Experience</h2>
         <p>Company Name: {experience.company.saved}</p>
         <p>Position Title: {experience.position.saved}</p>
-        <p>Main Tasks: {experience.tasks.saved}</p>
         <p>From: {experience.from.saved}</p>
         <p>To: {experience.to.saved}</p>
+        <p>Main Tasks: {experience.tasks.saved}</p>
         <button onClick={handleEdit.bind(this, "experience")} type="button">
           Edit
         </button>

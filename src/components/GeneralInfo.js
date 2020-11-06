@@ -8,12 +8,13 @@ function GeneralInfo(props) {
       <div className="container">
         <h2>General Information</h2>
         <form>
-          <label htmlFor="fullName">Full name:</label>
+          <label htmlFor="fullName">Full Name:</label>
           <input
             onChange={handleChange}
             id="fullName"
             type="text"
             value={generalInfo.fullname.input}
+            placeholder="Enter your name"
           />
           <label htmlFor="email">Email:</label>
           <input
@@ -22,6 +23,7 @@ function GeneralInfo(props) {
             name="email"
             id="email"
             value={generalInfo.email.input}
+            placeholder="example@email.com"
           />
           <label htmlFor="phone">Phone</label>
           <input
@@ -30,6 +32,7 @@ function GeneralInfo(props) {
             name="phone"
             id="phone"
             value={generalInfo.phone.input}
+            placeholder="Enter Phone"
           />
           <button type="submit" onClick={handleSubmit.bind(this, "general")}>
             Save

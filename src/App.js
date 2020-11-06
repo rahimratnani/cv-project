@@ -503,6 +503,7 @@ class App extends Component {
     console.log(this.state);
     return (
       <div>
+        <h1>CV Builder</h1>
         <GeneralInfo
           // passing general information state
           generalInfo={this.state.ganeralInfo}
