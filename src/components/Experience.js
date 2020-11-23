@@ -1,82 +1,243 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Experience(props) {
-  const { experience, handleChange, handleSubmit, handleEdit } = props;
+export default function Experience() {
+  const [company, setCompany] = useState({ input: "", saved: "" });
+  const [position, setPosition] = useState({ input: "", saved: "" });
+  const [tasks, setTasks] = useState({ input: "", saved: "" });
+  const [from, setFrom] = useState({ input: "", saved: "" });
+  const [to, setTo] = useState({ input: "", saved: "" });
+  const [editable, setEditable] = useState(true);
 
-  if (experience.editable) {
-    return (
-      <div className="container">
-        <h2>Work Experience</h2>
-        <form>
-          <label htmlFor="company">Company Name:</label>
-          <input
-            onChange={handleChange}
-            type="text"
-            id="company"
-            name="company"
-            value={experience.company.input}
-            placeholder="Enter Company Name"
-          />
-          <label htmlFor="position">Position Title:</label>
-          <input
-            onChange={handleChange}
-            type="text"
-            id="position"
-            name="position"
-            value={experience.position.input}
-            placeholder="Enter Job Title"
-          />
+  const handleChange = (e) => {
+    if (e.target.id === "company") {
+      setCompany((company) => ({
+        ...company,
+        input: e.target.value,
+      }));
+    } else if (e.target.id === "position") {
+      setPosition((position) => ({
+        ...position,
+        input: e.target.value,
+      }));
+    } else if (e.target.id === "from") {
+      setFrom((from) => ({
+        ...from,
+        input: e.target.value,
+      }));
+    } else if (e.target.id === "to") {
+      setTo((to) => ({
+        ...to,
+        input: e.target.value,
+      }));
+    } else if (e.target.id === "tasks") {
+      setTasks((tasks) => ({
+        ...tasks,
+        input: e.target.value,
+      }));
+    }
+  };
 
-          <label htmlFor="from">From:</label>
-          <input
-            onChange={handleChange}
-            type="date"
-            name="from"
-            id="from"
-            value={experience.from.input}
-          />
-          <label htmlFor="to">To:</label>
-          <input
-            onChange={handleChange}
-            type="date"
-            name="to"
-            id="to"
-            value={experience.to.input}
-          />
-          <label htmlFor="tasks">Main Tasks:</label>
-          <br />
-          <textarea
-            onChange={handleChange}
-            name="tasks"
-            id="tasks"
-            cols="30"
-            rows="3"
-            placeholder="Describe Your Role"
-          >
-            {experience.tasks.input}
-          </textarea>
-          <br />
-          <button type="submit" onClick={handleSubmit.bind(this, "experience")}>
-            Save
-          </button>
-        </form>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setCompany((company) => ({
+      saved: company.input,
+      input: "",
+    }));
+    setPosition((position) => ({
+      saved: position.input,
+      input: "",
+    }));
+    setFrom((from) => ({
+      saved: from.input,
+      input: "",
+    }));
+    setTo((to) => ({
+      saved: to.input,
+      input: "",
+    }));
+    setTasks((tasks) => ({
+      saved: tasks.input,
+      input: "",
+    }));
+    setEditable(false);
+  };
+
+  const handleEdit = () => {
+    setCompany((company) => ({
+      ...company,
+      input: company.saved,
+    }));
+    setPosition((position) => ({
+      ...position,
+      input: position.saved,
+    }));
+    setFrom((from) => ({
+      ...from,
+      input: from.saved,
+    }));
+    setTo((to) => ({
+      ...to,
+      input: to.saved,
+    }));
+    setTasks((tasks) => ({
+      ...tasks,
+      input: tasks.saved,
+    }));
+    setEditable(true);
+  };
+
+  let render;
+
+  if (editable) {
+    render = (
+      <div className="section">
+        <h4 className="title is-size-4 has-text-centered">Work Experience</h4>
+
+        <div className="columns is-mobile is-centered">
+          <div className="column is-10-mobile is-half-tablet">
+            <form>
+              <div className="field">
+                <label htmlFor="company" className="label">
+                  Company Name
+                </label>
+                <div className="control">
+                  <input
+                    onChange={handleChange}
+                    id="company"
+                    name="company"
+                    type="text"
+                    className="input"
+                    placeholder="Enter Company Name"
+                    value={company.input}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label" htmlFor="position">
+                  Position Title
+                </label>
+                <div className="control">
+                  <input
+                    type="text"
+                    id="position"
+                    name="position"
+                    className="input"
+                    placeholder="Enter Job Title"
+                    onChange={handleChange}
+                    value={position.input}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label" htmlFor="from">
+                  From
+                </label>
+                <div className="control">
+                  <input
+                    type="date"
+                    id="from"
+                    name="from"
+                    className="input"
+                    onChange={handleChange}
+                    value={from.input}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label" htmlFor="to">
+                  To
+                </label>
+                <div className="control">
+                  <input
+                    type="date"
+                    id="to"
+                    name="to"
+                    className="input"
+                    onChange={handleChange}
+                    value={to.input}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label" htmlFor="tasks">
+                  Main Tasks:
+                </label>
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    onChange={handleChange}
+                    name="tasks"
+                    id="tasks"
+                    placeholder="Describe Your Role"
+                  >
+                    {tasks.input}
+                  </textarea>
+                </div>
+              </div>
+
+              <div className="field">
+                <div className="control">
+                  <button
+                    className="button is-primary"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     );
   } else {
-    return (
-      <div className="container">
-        <h2>Work Experience</h2>
-        <p>Company Name: {experience.company.saved}</p>
-        <p>Position Title: {experience.position.saved}</p>
-        <p>From: {experience.from.saved}</p>
-        <p>To: {experience.to.saved}</p>
-        <p>Main Tasks: {experience.tasks.saved}</p>
-        <button onClick={handleEdit.bind(this, "experience")} type="button">
-          Edit
-        </button>
+    render = (
+      <div className="section">
+        <h4 className="title is-size-4 has-text-centered">Work Experience</h4>
+        <div className="columns is-mobile is-centered">
+          <div className="column is-10-mobile is-half-tablet">
+            <div className="content">
+              <ul>
+                <li>
+                  <strong>Company Name: </strong>
+                  {company.saved}
+                </li>
+                <li>
+                  <strong>Position Title: </strong>
+                  {position.saved}
+                </li>
+                <li>
+                  <strong>From: </strong>
+                  {from.saved}
+                </li>
+                <li>
+                  <strong>To: </strong>
+                  {to.saved}
+                </li>
+                <li>
+                  <strong>Main Tasks: </strong>
+                  {tasks.saved}
+                </li>
+              </ul>
+            </div>
+            <button
+              className="button is-link is-small"
+              type="button"
+              onClick={handleEdit}
+            >
+              Edit
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
-}
 
-export default Experience;
+  return render;
+}
